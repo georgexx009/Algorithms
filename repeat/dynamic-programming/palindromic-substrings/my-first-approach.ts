@@ -60,6 +60,8 @@ function searchPalindrome(i: number, s: string): number {
   return counter
 }
 
+
+// time complexity O(n2)
 export function countSubstrings(s: string): number {
   let counter = 0
   for (let i = 0; i < s.length; i++) {
