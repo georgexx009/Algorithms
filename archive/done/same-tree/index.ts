@@ -1,4 +1,4 @@
-import { IBaseTestingWorkspace, createTestingWorkspace } from '../../../utils'
+import { IBaseTestingWorkspace, createTestingWorkspace } from '../../utils'
 import { isSameTree } from './my-first-approach'
 
 interface Input {
