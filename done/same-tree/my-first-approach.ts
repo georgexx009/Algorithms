@@ -1,4 +1,4 @@
-import { TreeNode } from '../../../utils/tree'
+import { TreeNode } from '../../utils/tree'
 
 function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
   const currentNode1 = p
