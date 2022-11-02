@@ -10,7 +10,7 @@ interface IMergeIntervals {
   }
 }
 
-const mergeIntervals: {
+const solution: {
   tests: IMergeIntervals['test'][]
   runTests: () => void
 } = {
@@ -102,6 +102,6 @@ function merge(intervals: number[][]): number[][] {
   return [...mergedIntervals, workingInterval]
 }
 
-mergeIntervals.runTests()
+solution.runTests()
 
 
