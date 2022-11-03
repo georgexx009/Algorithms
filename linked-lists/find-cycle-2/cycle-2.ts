@@ -1,6 +1,6 @@
-import { ListNode } from '../../_archive/linked-lists/list-node'
-import { createLinkedListWithCycleFromArray, stringifyLinkedListWithCycle } from '../../_archive/linked-lists/utils'
-import { longLinkedList } from './long-linked-list'
+import { ListNode } from '../../archive/_archive/linked-lists/list-node'
+import { createLinkedListWithCycleFromArray } from '../../archive/_archive/linked-lists/utils'
+import { longLinkedList } from '../../archive/repeat/linked-list/long-linked-list'
 
 // constant memory
 // do not modify the linked list
