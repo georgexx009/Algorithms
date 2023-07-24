@@ -54,7 +54,7 @@ const solution: {
   }],
   runTests: function() {
     this.tests.forEach(test => {
-      const result = merge(test.input);
+      const result = mergeV2(test.input);
       console.log('input: ', test.input)
       console.log('expected: ', test.expected)
       console.log('result: ', result)
@@ -100,6 +100,37 @@ function merge(intervals: number[][]): number[][] {
   }
 
   return [...mergedIntervals, workingInterval]
+}
+
+function mergeV2(intervals: number[][]): number[][] {
+  let startNewInterval: null | number = null
+  const newArr: number[][] = []
+  let higherRight = -1
+
+  if (intervals.length === 0) return []
+  const sortedIntervals = intervals.sort(function(a, b){return a[0]-b[0]})
+
+  for (let i of sortedIntervals) {
+    if (higherRight >= i[0] && higherRight < i[1]) {
+      if (startNewInterval === null) continue
+      newArr.push([startNewInterval, i[1]])
+      higherRight = -1
+      startNewInterval = null
+    }
+    else if (higherRight >= i[1]) {
+      continue
+    }
+    else if (higherRight && startNewInterval) {
+      newArr.push([startNewInterval, i[1]])
+      higherRight = -1
+      startNewInterval = null
+    }
+    else {
+      higherRight = i[1]
+      startNewInterval = i[0]
+    }
+  }
+  return newArr
 }
 
 solution.runTests()
