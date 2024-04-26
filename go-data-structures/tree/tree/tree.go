@@ -6,51 +6,68 @@ import (
 )
 
 type TreeNode struct {
-  val int
-  left *TreeNode
-  right *TreeNode
+  Val int
+  Left *TreeNode
+  Right *TreeNode
 }
 
 func New(treeArr []int) *TreeNode {
-  root := &TreeNode{val: treeArr[0]}
-  queue := []*TreeNode{root}
+  queue := []*TreeNode{}
+  root := &TreeNode{Val: treeArr[0]}
   currentNode := root
 
-  for _, num := range treeArr[1:] {
-    if currentNode.left == nil && currentNode.right == nil && len(queue) > 0 {
-      currentNode = queue[0]
-      queue = queue[1:]
+  turn := 0
+  updateTurn := func() {
+    turn++
+    if turn > 2 {
+      turn = 0
     }
+  }
 
-    if num == 0 {
+  for _, treeNum := range treeArr[1:] {
+    // unexisting leaf
+    if treeNum == 0 {
+      updateTurn()
       continue
     }
 
-    if currentNode.left == nil {
-      newNode := &TreeNode{val: num}
-      currentNode.left = newNode
+    if turn == 0 { // turn: left
+      newNode := &TreeNode{Val: treeNum}
+      currentNode.Left = newNode
       queue = append(queue, newNode)
-    } else if currentNode.right == nil {
-      newNode := &TreeNode{val: num}
-      currentNode.right = newNode
+    } else if turn == 1 { // turn: right
+      newNode := &TreeNode{Val: treeNum}
+      currentNode.Right = newNode
       queue = append(queue, newNode)
+    } else { // turn: create
+      newNode := &TreeNode{Val: treeNum}
+      queue = append(queue, newNode)
+
+      currentNode = queue[0]
+      queue = queue[1:]
+      currentNode.Left = newNode
+      updateTurn()
     }
+
+    updateTurn()
   }
 
   return root
 }
 
+// BUG - infinite print
 func BSF(root *TreeNode) {
   queue := []*TreeNode{root}
 
   for len(queue) > 0 {
     activeNode := queue[0]
+    fmt.Print(activeNode.Val)
     queue = queue[1:]
-    if (activeNode.left != nil) {
-      queue = append(queue, root.left)
+    if (activeNode.Left != nil) {
+      queue = append(queue, root.Left)
     }
-    if (root.right != nil) {
-      queue = append(queue, root.right)
+    if (root.Right != nil) {
+      queue = append(queue, root.Right)
     }
   }
 }
@@ -60,8 +77,8 @@ func PrintTree(node *TreeNode, prefix string) {
         return
     }
 
-    fmt.Println(prefix + strconv.Itoa(node.val))
+    fmt.Println(prefix + strconv.Itoa(node.Val))
 
-    PrintTree(node.left, prefix + "--")
-    PrintTree(node.right, prefix + "--")
+    PrintTree(node.Left, prefix + "--")
+    PrintTree(node.Right, prefix + "--")
 }
