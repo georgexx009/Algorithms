@@ -1,6 +1,9 @@
 package main
 
-import "tree/tree"
+import (
+	"fmt"
+	"tree/tree"
+)
 
 func testCase1() {
   // [5,1,4,null,null,3,6]
@@ -17,4 +20,6 @@ func testBFS() {
 
 func main() {
   testBFS()
+  fmt.Println()
+  testCase1()
 }

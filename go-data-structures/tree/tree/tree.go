@@ -11,6 +11,34 @@ type TreeNode struct {
   Right *TreeNode
 }
 
+func New2(treeArr []int) *TreeNode {
+  queue := []*TreeNode{}
+  root := &TreeNode{Val: treeArr[0]}
+  currentNode := root
+
+  for i, treeNum := range treeArr[1:] {
+    turn := (i-1)%3
+
+    // NOTE - more than a third turn to create, maybe we need only two
+    // BUG - 2 nils doesn't update the currentNode
+
+    if turn == 0 { // turn: left
+      newNode := &TreeNode{Val: treeNum}
+      currentNode.Left = newNode
+      queue = append(queue, newNode)
+      continue
+    } else if turn == 1 { // turn: right
+      newNode := &TreeNode{Val: treeNum}
+      currentNode.Right = newNode
+      queue = append(queue, newNode)
+      continue
+    }
+
+  }
+
+  return root
+}
+
 func New(treeArr []int) *TreeNode {
   queue := []*TreeNode{}
   root := &TreeNode{Val: treeArr[0]}
@@ -61,13 +89,13 @@ func BSF(root *TreeNode) {
 
   for len(queue) > 0 {
     activeNode := queue[0]
-    fmt.Print(activeNode.Val)
     queue = queue[1:]
+    fmt.Print(activeNode.Val)
     if (activeNode.Left != nil) {
-      queue = append(queue, root.Left)
+      queue = append(queue, activeNode.Left)
     }
-    if (root.Right != nil) {
-      queue = append(queue, root.Right)
+    if (activeNode.Right != nil) {
+      queue = append(queue, activeNode.Right)
     }
   }
 }
