@@ -1,7 +1,7 @@
 package main
 
 func longestPalindrome(s string) string {
-	maxSubstr := ""
+	maxSubstr := s
 	for i := 0; i < len(s); i++ {
 		for j := i + 1; j < len(s); j++ {
 			substr := s[i : j+1]

@@ -34,10 +34,11 @@ func maxProfit(prices []int) int {
 	for _, num := range prices[1:] {
 		if smallestPrice > num {
 			smallestPrice = num
-		}
-		currentSell := num - smallestPrice
-		if currentSell > highestSell {
-			highestSell = currentSell
+		} else {
+			currentSell := num - smallestPrice
+			if currentSell > highestSell {
+				highestSell = currentSell
+			}
 		}
 	}
 
