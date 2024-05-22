@@ -23,20 +23,23 @@ func max(num1, num2 int) int {
 	return num2
 }
 
+// track the highest sell and the lowest number
 func maxProfit(prices []int) int {
-	smallest := prices[0]
-	largest := prices[0]
+	if len(prices) == 0 {
+		return 0
+	}
+	highestSell := 0
+	smallestPrice := prices[0]
 
 	for _, num := range prices[1:] {
-		if num < smallest {
-			smallest = num
-			largest = num
-			continue
+		if smallestPrice > num {
+			smallestPrice = num
 		}
-		if num > largest {
-			largest = num
-			continue
+		currentSell := num - smallestPrice
+		if currentSell > highestSell {
+			highestSell = currentSell
 		}
 	}
-	return largest - smallest
+
+	return highestSell
 }

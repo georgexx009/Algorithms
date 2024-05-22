@@ -6,20 +6,20 @@ import (
 )
 
 func testCase1() {
-  // [5,1,4,null,null,3,6]
-  arr := []int{5,1,4,0,0,3,6}
-  root := tree.New(arr)
-  tree.BSF(root)
+	// [5,1,4,null,null,3,6]
+	arr := []int{5, 1, 4, 0, 0, 3, 6}
+	root := tree.New2(arr)
+	tree.BSF(root)
 }
 
 func testBFS() {
-  t4 := tree.TreeNode{Val: 4, Left: &tree.TreeNode{Val: 3}, Right: &tree.TreeNode{Val: 6}}
-  t1 := tree.TreeNode{Val: 5, Left: &tree.TreeNode{Val: 1}, Right: &t4}
-  tree.BSF(&t1)
+	t4 := tree.TreeNode{Val: 4, Left: &tree.TreeNode{Val: 3}, Right: &tree.TreeNode{Val: 6}}
+	t1 := tree.TreeNode{Val: 5, Left: &tree.TreeNode{Val: 1}, Right: &t4}
+	tree.BSF(&t1)
 }
 
 func main() {
-  testBFS()
-  fmt.Println()
-  testCase1()
+	testBFS()
+	fmt.Println()
+	testCase1()
 }
