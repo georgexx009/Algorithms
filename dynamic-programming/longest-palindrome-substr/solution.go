@@ -1,7 +1,10 @@
 package main
 
-func longestPalindrome(s string) string {
-	maxSubstr := s
+func longestPalindromeV1(s string) string {
+	if len(s) == 0 {
+		return ""
+	}
+	maxSubstr := s[0:1]
 	for i := 0; i < len(s); i++ {
 		for j := i + 1; j < len(s); j++ {
 			substr := s[i : j+1]
